@@ -1,6 +1,6 @@
-var CACHE = 'cache';
+const CACHE = 'cache';
 
-var urls = [
+const urls = [
   '/',
   'favicon.svg',
   'manifest.webmanifest',
