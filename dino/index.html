@@ -37,7 +37,7 @@
 
     @media screen and (prefers-color-scheme: dark) {
       html {
-          filter: invert(0.96);
+          filter: invert(1);
       }
     }
   </style>
@@ -105,7 +105,7 @@
         })();
       });
 
-      // register the service worker
+      // register service worker
       if (navigator && navigator.serviceWorker) {
         navigator.serviceWorker.register('sw.js');
       }
