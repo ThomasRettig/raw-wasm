@@ -1,4 +1,4 @@
-var CACHE = 'cache-v1';
+var CACHE = 'cache';
 
 var urls = [
   '/',
