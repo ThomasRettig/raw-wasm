@@ -104,5 +104,10 @@
           context.putImageData(imageData, 0, 0);
         })();
       });
+
+      // register the service worker
+      if (navigator && navigator.serviceWorker) {
+        navigator.serviceWorker.register('sw.js');
+      }
   </script>
 </body>
