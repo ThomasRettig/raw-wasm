@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <head>
+  <meta charset="utf-8">
   <title>Dino Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <!--SEO stuff-->
   <meta name="description" content="Play the classic Chrome Dino game in your browser made with WebAssembly.">
+  <meta name="author" content="Thomas Rettig">
   <meta name="og:title" content="Dino Game">
   <meta name="og:type" content="website">
   <meta name="og:image" content="https://dinosaurus.netlify.app/og-image.png">
@@ -110,4 +113,5 @@
         navigator.serviceWorker.register('sw.js');
       }
   </script>
+  <noscript><p>Sorry, but you need to enable Javascript to run this game.</p></noscript>
 </body>
