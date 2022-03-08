@@ -44,11 +44,6 @@
   <script>
     fetch("dino.wasm").then(a=>a.arrayBuffer()).then(a=>WebAssembly.instantiate(a,{Math})).then(a=>{let b=a.instance,c=new Uint8Array(b.exports.mem.buffer,20480,9e4),d=document.querySelector("canvas"),e=d.getContext("2d"),f=e.createImageData(300,75),g=new Uint8Array(b.exports.mem.buffer,0,4),h=(a,b)=>{let c;switch(b.code){case"ArrowUp":c=1;break;case"ArrowDown":c=2;break;default:return;}a?g[0]|=c:g[0]&=~c};document.addEventListener("keydown",h.bind(null,1),!1),document.addEventListener("keyup",h.bind(null,0),!1);let i={},j=(a,b)=>{for(let c of b.changedTouches)if(a){let a;a=c.clientX<.5*b.target.clientWidth?2:1,g[0]|=a,i[c.identifier]=a}else g[0]&=~i[c.identifier],delete i[c.identifier];b.preventDefault()};d.addEventListener("touchstart",j.bind(null,1),!1),d.addEventListener("touchend",j.bind(null,0),!1),function a(){requestAnimationFrame(a),b.exports.run(),f.data.set(c),e.putImageData(f,0,0)}()}),navigator&&navigator.serviceWorker&&navigator.serviceWorker.register("sw.js");
   </script>
-  <script type="module">
-    // instantiate dialogue
-    var dialogEl = document.getElementById('dialog');
-    var dialog = new A11yDialog(dialogEl);
-  </script>
+  <script type="module">var dialogEl = document.getElementById('dialog');var dialog = new A11yDialog(dialogEl);</script>
   <script src="a11y-dialog.min.js"></script>
-  <noscript><p>Sorry, but you need to enable Javascript to run this game.</p></noscript>
 </body>
