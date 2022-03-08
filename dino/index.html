@@ -71,7 +71,6 @@
     }
 
     .dialog-content {
-      content-visibility: auto;
       background-color: rgb(255, 255, 255);
       margin: auto;
       z-index: 2;
@@ -81,6 +80,10 @@
       max-width: 82%;
       width: 600px;
       border-radius: 5px;
+    }
+
+    .dialog-overlay, .dialog-content {
+      content-visibility: auto;
     }
 
     @media screen and (min-width: 700px) {
