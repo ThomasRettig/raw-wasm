@@ -23,6 +23,7 @@
   <!--CSS stuff-->
   <style>
     body {
+      font-family: system-ui;
       position: absolute;
       display: flex;
       flex-direction: column;
@@ -30,6 +31,7 @@
       margin: 0;
       width: 100%;
       height: 100%;
+      user-select: none;
     }
 
     canvas {
@@ -39,9 +41,139 @@
       image-rendering: pixelated;
     }
 
+    h1 {
+      margin: 0;
+    }
+
+    .dialog-container {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 2;
+    }
+
+    .dialog-container[aria-hidden='true'] {
+      display: none;
+    }
+
+    .dialog-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: rgba(43, 46, 56, 0.9);
+      animation: fade-in 200ms both;
+      backdrop-filter: blur(6px) brightness(0.4);
+    }
+
+    .dialog-content {
+      content-visibility: auto;
+      background-color: rgb(255, 255, 255);
+      margin: auto;
+      z-index: 2;
+      position: relative;
+      animation: fade-in 400ms 200ms both, slide-up 400ms 200ms both;
+      padding: 1em;
+      max-width: 82%;
+      width: 600px;
+      border-radius: 5px;
+    }
+
+    @media screen and (min-width: 700px) {
+      .dialog-content {
+        padding: 2em;
+      }
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+    }
+
+    @keyframes slide-up {
+      from {
+        transform: translateY(10%);
+      }
+    }
+
+    .dialog-close {
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      border: 0;
+      padding: 0;
+      background-color: transparent;
+      font-weight: bold;
+      font-size: 1.25em;
+      width: 1.2em;
+      height: 1.2em;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    @media screen and (min-width: 700px) {
+      .dialog-close {
+        top: 1em;
+        right: 1em;
+      }
+    }
+
+    .link-like, a {
+      color: #2984c2;
+    }
+
+    .link-like:hover, .link-like:active, a:hover, a:active {
+      color: #e50050;
+    }
+
+    .link-like {
+      background-color: transparent;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+    }
+
     @media screen and (prefers-color-scheme: dark) {
       html {
           filter: invert(1);
+      }
+
+      button, .dialog-content {
+        filter: invert(1);
+      }
+
+      .dialog-content {
+        background-color: #131313;
+        color: #eee;
+      }
+
+      .dialog-overlay {
+        filter: invert(0.85);
+      }
+
+      .link-like, a {
+        color: #aaa;
+      }
+
+      .link-like:hover, .link-like:active, a:hover, a:active {
+        color: #eee;
+      }
+
+      kbd {
+        background: #333;
+        padding: 2px;
+        border-radius: 5px;
       }
     }
   </style>
@@ -50,6 +182,19 @@
   <main role="application">
     <canvas width="300" height="75" aria-label="Dino game" oncontextmenu="return false;"></canvas>
   </main>
+  <footer>
+    <button class="link-like" data-a11y-dialog-show="dialog">Help</button>
+    <div class="dialog-container" id="dialog" aria-hidden="true" aria-labelledby="title" aria-describedby="description">
+          <div class="dialog-overlay" data-a11y-dialog-hide></div>
+          <div class="dialog-content" role="document">
+            <button data-a11y-dialog-hide class="dialog-close" aria-label="Close this dialog window"><img src="close.svg" aria-hidden="true" title="Close this dialog"></button>
+            <h1 id="title">Controls</h1>
+            <div id="description">
+              <p>On desktop, you use the <kbd>up</kbd>, <kbd>down</kbd> keys to jump and duck respectively. On moible, tap the screen left side to duck and right side to jump. <em>Happy playing!</em></p>
+          </div>
+        </div>
+  </footer>
+  <!--Scripts-->
   <script>
     fetch('dino.wasm')
       .then(response => response.arrayBuffer())
@@ -114,5 +259,10 @@
         navigator.serviceWorker.register('sw.js');
       }
   </script>
+  <script type="module">
+    var dialogEl = document.getElementById('dialog');
+    var dialog = new A11yDialog(dialogEl);
+  </script>
+  <script src="https://unpkg.com/a11y-dialog@7.3.0/dist/a11y-dialog.min.js"></script>
   <noscript><p>Sorry, but you need to enable Javascript to run this game.</p></noscript>
 </body>
