@@ -2,12 +2,10 @@ const CACHE = 'cache';
 
 const urls = [
   '/',
-  'favicon.svg',
   'manifest.webmanifest',
   'dino.wasm', // WASM binary
   'icon-192x192.png', // Default favicon size fetched by Chrome
   'icon-512x512.png', // Apple touch icon if user installs the app when offline
-  'sw.js'
 ];
 
 self.addEventListener('install', function(event) {
